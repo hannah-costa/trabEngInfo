@@ -193,7 +193,7 @@ class TfIdf {
     let ordenacao = [];
     for (let i = 0; i < this.corpus.length; i++) {
       ordenacao.push({
-        documento: this.corpus[i],
+        //documento: this.corpus[i],
         grauSimilaridade: this.calculaGrauSimilaridade(buscaArr, this.corpus[i]),
         index: i,
         nomeDocumento: this.tracker[i].documento
@@ -204,14 +204,6 @@ class TfIdf {
     })
     return ordenacao;
   }
-
-  /*
-  *  Retorna os indíces dos documentos ordenados.
-  */
-  indicesDocs() {
-    return this.tracker;
-  }
-
 }
 
 export { TfIdf };

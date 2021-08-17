@@ -2,11 +2,6 @@ import { TfIdf } from "./tf-idf.js";
 import promptSync from "prompt-sync";
 const prompt = promptSync();
 const tfIdf = new TfIdf();
-/*
-for (let i = 1; i <= 26; i++) {
-  let corpus = tfIdf.umDocParaCorpus("docsTXT/doc"+i+".txt");
-}
-*/
 
 let corpus = tfIdf.grupoDocsParaCorpus(["docsTXT/A nova Califórnia.txt","docsTXT/A Sombra do Romariz.txt","docsTXT/Carta de um defunto rico.txt",
                     "docsTXT/Eficiência militar.txt","docsTXT/Fim de um sonho.txt","docsTXT/Foi buscar lã....txt",

@@ -1,3 +1,5 @@
+import { readFileSync } from "fs";
+import { words } from "./stopWord.js";
 /*
 *  Classe para recuperação de informação de um
 *  conjunto de documentos utilizando o modelo de 
@@ -15,10 +17,16 @@ class TfIdf {
   */
   umDocParaCorpus(caminho) {
     try {
-      let data = fs.readFileSync(caminho, { encoding: 'utf8' });
-      data = data.replace(/[\r\n]/g, " ")
+      let data = readFileSync(caminho, { encoding: 'utf8' });
+
+      data = data.replace(/[^A-z\u00C0-\u00ff]+/g," ");
       data = data.trim();
-      this.corpus.push(data.split(" "));
+      data = data.split(" ");
+      data = data.filter((item) =>{
+        if(words.indexOf(item) === -1) return item;
+      });
+
+      this.corpus.push(data);
       this.tracker.push({
         index: this.corpus.length - 1,
         documento: caminho
@@ -38,10 +46,16 @@ class TfIdf {
     //let corpus = []
     for (let i = 0; i < docs.length; i++) {
       try {
-        let data = fs.readFileSync(docs[i], { encoding: 'utf8' });
-        data = data.replace(/[\r\n]/g, " ")
+        let data = readFileSync(docs[i], { encoding: 'utf8' });
+
+        data = data.replace(/[^A-z\u00C0-\u00ff]+/g," ");
         data = data.trim();
-        this.corpus.push(data.split(" "));
+        data = data.split(" ");
+        data = data.filter((item) =>{
+          if(words.indexOf(item) === -1) return item;
+        });
+
+        this.corpus.push(data);
         this.tracker.push({
           index: this.corpus.length - 1,
           documento: docs[i]
@@ -193,3 +207,5 @@ class TfIdf {
   }
 
 }
+
+export { TfIdf };

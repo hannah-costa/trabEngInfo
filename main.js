@@ -1,16 +1,8 @@
-const readline = require('readline');
-let a = "";
- 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
- 
-rl.setPrompt(`oq tu quer? `);
-rl.prompt();
-rl.on('line', (answer) => {
-    a = answer;
-    rl.close();
-});
+const prompt = require('prompt-sync')({sigint: true});
 
-console.log("reposta: " + a);
+console.log("oq procuras?")
+const a = prompt();
+
+let test = a.replace(/[^A-z\u00C0-\u00ff]+/g," ");
+
+console.log("resposta: "+ test);

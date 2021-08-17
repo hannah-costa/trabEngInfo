@@ -1,6 +1,0 @@
-1. indexação(?) do documento
-2. armazenar os index
-3. função de busca
-4. indexação da busca
-5. casamento, ordenação por relevância
-6. resultado

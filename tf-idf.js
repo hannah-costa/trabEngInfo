@@ -23,7 +23,7 @@ class TfIdf {
       data = data.trim();
       data = data.split(" ");
       data = data.filter((item) =>{
-        if(words.indexOf(item) === -1) return item;
+        if(words.indexOf(item.toLowerCase()) === -1) return item;
       });
 
       this.corpus.push(data);
@@ -52,7 +52,7 @@ class TfIdf {
         data = data.trim();
         data = data.split(" ");
         data = data.filter((item) =>{
-          if(words.indexOf(item) === -1) return item;
+          if(words.indexOf(item.toLowerCase()) === -1) return item;
         });
 
         this.corpus.push(data);
@@ -184,13 +184,19 @@ class TfIdf {
   *  da ordenacao.
   */
   ordenaDocsPorBusca(busca) {
-    busca = busca.split(" ");
+    let buscaArr = busca.replace(/[^A-z\u00C0-\u00ff]+/g," ");
+    buscaArr = buscaArr.trim();
+    buscaArr = buscaArr.split(" ");
+    buscaArr = buscaArr.filter((item) =>{
+      if(words.indexOf(item.toLowerCase()) === -1) return item;
+    });
     let ordenacao = [];
     for (let i = 0; i < this.corpus.length; i++) {
       ordenacao.push({
         documento: this.corpus[i],
-        grauSimilaridade: this.calculaGrauSimilaridade(busca, this.corpus[i]),
+        grauSimilaridade: this.calculaGrauSimilaridade(buscaArr, this.corpus[i]),
         index: i,
+        nomeDocumento: this.tracker[i].documento
       });
     }
     ordenacao.sort((a, b) => {
